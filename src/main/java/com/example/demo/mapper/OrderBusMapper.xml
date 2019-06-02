@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.IOrderBusDAO" >
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.OrderBus" >
+    <id column="recId" property="recid" jdbcType="INTEGER" />
+    <result column="ord_id" property="ordId" jdbcType="INTEGER" />
+    <result column="bus_id" property="busId" jdbcType="INTEGER" />
+    <result column="route" property="route" jdbcType="VARCHAR" />
+    <result column="add_name" property="addName" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="DATE" />
+    <result column="update_name" property="updateName" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="DATE" />
+  </resultMap>
+
+  <resultMap id="BusOrderResultMap" type="com.example.demo.domain.OrderBusDomain" extends="BaseResultMap">
+    <result column="ord_id" property="ordId" jdbcType="INTEGER" />
+    <result column="bus_id" property="busId" jdbcType="INTEGER" />
+    <result column="bus_no" property="busNo" jdbcType="VARCHAR" />
+    <result column="driver" property="driver" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="bus_model" property="busModel" jdbcType="INTEGER" />
+    <result column="route" property="route" jdbcType="VARCHAR" />
+    <result column="add_name" property="addName" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="DATE" />
+    <result column="update_name" property="updateName" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="DATE" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    recId, ord_id, bus_id, route, add_name, add_time, update_name, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from aub_order_bus
+    where recId = #{recid,jdbcType=INTEGER}
+  </select>
+
+  <sql id="BusOrder_bus_Column_List" >
+    a.ord_id, a.bus_id, a.route, b.bus_no, b.driver, b.tel, b.bus_model, b.remark, a.add_name, a.add_time, a.update_name, a.update_time
+  </sql>
+
+  <select id="listByOrdId" parameterType="integer" resultMap="BusOrderResultMap">
+    select
+    <include refid="BusOrder_bus_Column_List" />
+    from aub_order_bus a,aub_bus b
+    where ord_id = #{ordId,jdbcType=INTEGER}
+      and a.bus_id=b.bus_id
+  </select>
+
+  <insert id="insert" parameterType="com.example.demo.entity.OrderBus" >
+    insert into aub_order_bus (recId, ord_id, bus_id, 
+      route, add_name, add_time, 
+      update_name, update_time)
+    values (#{recid,jdbcType=INTEGER}, #{ordId,jdbcType=INTEGER}, #{busId,jdbcType=INTEGER}, 
+      #{route,jdbcType=VARCHAR}, #{addName,jdbcType=VARCHAR}, #{addTime,jdbcType=DATE}, 
+      #{updateName,jdbcType=VARCHAR}, #{updateTime,jdbcType=DATE})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.OrderBus" >
+    update aub_order_bus
+    set ord_id = #{ordId,jdbcType=INTEGER},
+      bus_id = #{busId,jdbcType=INTEGER},
+      route = #{route,jdbcType=VARCHAR},
+      add_name = #{addName,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=DATE},
+      update_name = #{updateName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=DATE}
+    where recId = #{recid,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteByOrdId" parameterType="integer">
+    delete from aub_order_bus where ord_id = #{ordId,jdbcType=INTEGER}
+  </delete>
+</mapper>

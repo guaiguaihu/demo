@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.IOrderDAO" >
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.Order" >
+    <id column="ord_id" property="ordId" jdbcType="INTEGER" />
+    <result column="ord_type" property="ordType" jdbcType="VARCHAR" />
+    <result column="use_bus_start_time" property="useBusStartTime" jdbcType="TIMESTAMP" />
+    <result column="use_bus_end_time" property="useBusEndTime" jdbcType="TIMESTAMP" />
+    <result column="contract_no" property="contractNo" jdbcType="VARCHAR" />
+    <result column="contract_amount" property="contractAmount" jdbcType="DECIMAL" />
+    <result column="pre_contract_amount" property="preContractAmount" jdbcType="DECIMAL" />
+    <result column="contain_cost" property="containCost" jdbcType="INTEGER" />
+    <result column="addr_get_on" property="addrGetOn" jdbcType="VARCHAR" />
+    <result column="addr_get_off" property="addrGetOff" jdbcType="VARCHAR" />
+    <result column="pay_type" property="payType" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="add_name" property="addName" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="DATE" />
+    <result column="update_name" property="updateName" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="DATE" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="delete_name" property="deleteName" jdbcType="VARCHAR" />
+    <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
+    <result column="use_bus_com" property="useBusCom" jdbcType="VARCHAR" />
+    <result column="use_bus_contact" property="useBusContact" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ord_id, ord_type, use_bus_start_time, use_bus_end_time, contract_no, contract_amount, 
+    pre_contract_amount, contain_cost, addr_get_on, addr_get_off, pay_type, remark, add_name, 
+    add_time, update_name, update_time, delete_flag, delete_name, delete_time, use_bus_com, 
+    use_bus_contact
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from aub_order
+    where ord_id = #{ordId,jdbcType=INTEGER}
+  </select>
+  <insert id="insert" parameterType="com.example.demo.entity.Order" useGeneratedKeys="true" keyProperty="ordId" >
+    insert into aub_order (ord_id, ord_type, use_bus_start_time, 
+      use_bus_end_time, contract_no, contract_amount, 
+      pre_contract_amount, contain_cost, addr_get_on, 
+      addr_get_off, pay_type, remark, 
+      add_name, add_time, update_name, 
+      update_time,  use_bus_com, use_bus_contact
+      )
+    values (#{ordId,jdbcType=INTEGER}, #{ordType,jdbcType=VARCHAR}, #{useBusStartTime,jdbcType=TIMESTAMP}, 
+      #{useBusEndTime,jdbcType=TIMESTAMP}, #{contractNo,jdbcType=VARCHAR}, #{contractAmount,jdbcType=DECIMAL}, 
+      #{preContractAmount,jdbcType=DECIMAL}, #{containCost,jdbcType=INTEGER}, #{addrGetOn,jdbcType=VARCHAR}, 
+      #{addrGetOff,jdbcType=VARCHAR}, #{payType,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{addName,jdbcType=VARCHAR}, #{addTime,jdbcType=DATE}, #{updateName,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=DATE}, #{useBusCom,jdbcType=VARCHAR}, #{useBusContact,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.Order" >
+    update aub_order
+    set ord_type = #{ordType,jdbcType=VARCHAR},
+      use_bus_start_time = #{useBusStartTime,jdbcType=TIMESTAMP},
+      use_bus_end_time = #{useBusEndTime,jdbcType=TIMESTAMP},
+      contract_no = #{contractNo,jdbcType=VARCHAR},
+      contract_amount = #{contractAmount,jdbcType=DECIMAL},
+      pre_contract_amount = #{preContractAmount,jdbcType=DECIMAL},
+      contain_cost = #{containCost,jdbcType=INTEGER},
+      addr_get_on = #{addrGetOn,jdbcType=VARCHAR},
+      addr_get_off = #{addrGetOff,jdbcType=VARCHAR},
+      pay_type = #{payType,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      update_name = #{updateName,jdbcType=VARCHAR},
+      update_time = sysdate(),
+      use_bus_com = #{useBusCom,jdbcType=VARCHAR},
+      use_bus_contact = #{useBusContact,jdbcType=VARCHAR}
+    where ord_id = #{ordId,jdbcType=INTEGER}
+  </update>
+
+  <update id="delete" parameterType="com.example.demo.entity.Order">
+    update aub_order
+    set delete_name = #{deleteName,jdbcType=VARCHAR},
+      delete_time = sysdate(),
+      delete_flag = 1
+      where ord_id = #{ordId,jdbcType=INTEGER}
+  </update>
+
+  <sql id="searchCondition">
+    <if test="order.ordType != null and order.ordType != ''">
+      ord_type = #{ordType,jdbcType=VARCHAR}
+    </if>
+    <if test="order.useBusStartTime != null and order.useBusStartTime != ''">
+      use_bus_start_time = #{useBusStartTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="order.useBusEndTime != null and order.useBusEndTime != ''">
+      use_bus_end_time = #{useBusEndTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="order.contractNo != null and order.contractNo != ''">
+      contract_no = #{contractNo,jdbcType=VARCHAR}
+    </if>
+    <if test="order.contractAmount != null and order.contractAmount != ''">
+      contract_amount = #{contractAmount,jdbcType=DECIMAL}
+    </if>
+    <if test="order.preContractAmount != null and order.preContractAmount != ''">
+      pre_contract_amount = #{preContractAmount,jdbcType=DECIMAL}
+    </if>
+    <if test="order.containCost != null and order.containCost != ''">
+      contain_cost = #{containCost,jdbcType=INTEGER}
+    </if>
+    <if test="order.addrGetOn != null and order.addrGetOn != ''">
+      addr_get_on = #{addrGetOn,jdbcType=VARCHAR}
+    </if>
+    <if test="order.addrGetOff != null and order.addrGetOff != ''">
+      addr_get_off = #{addrGetOff,jdbcType=VARCHAR}
+    </if>
+    <if test="order.payType != null and order.payType != ''">
+      pay_type = #{payType,jdbcType=VARCHAR}
+    </if>
+    <if test="order.useBusCom != null and order.useBusCom != ''">
+      use_bus_com = #{useBusCom,jdbcType=VARCHAR}
+    </if>
+    <if test="order.useBusContact != null and order.useBusContact != ''">
+      use_bus_contact = #{useBusContact,jdbcType=VARCHAR}
+    </if>
+  </sql>
+
+  <sql id="pagination">
+    ord_id > (#{page}-1)*#{limit} limit #{limit}
+  </sql>
+
+  <select id="getListOrderCount" parameterType="map" resultType="int">
+    select count(1)
+    from aub_order where delete_flag = 0 <include refid="searchCondition"/>
+  </select>
+
+  <select id="listOrder" parameterType="map" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from aub_order where delete_flag = 0 <include refid="searchCondition"/> and <include refid="pagination"/>
+  </select>
+
+  <select id="getOrder" parameterType="integer" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from aub_order where ord_id = #{ordId, jdbcType=INTEGER}
+  </select>
+</mapper>

@@ -1,0 +1,45 @@
+
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://192.168.23.62:3306/mysql?serverTimezone=Hongkong&useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=CONVERT_TO_NULL
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    dbcp2:
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      validation-query: SELECT 1 FROM DUAL
+      time-between-eviction-runs-millis: 300000
+      min-evictable-idle-time-millis: 1800000
+      pool-prepared-statements: true
+      soft-min-evictable-idle-time-millis: 300000
+      min-idle: 1
+      max-wait-millis: 60000
+      initial-size: 1
+      max-total: 20
+    hikari:
+      maximum-pool-size: 20
+    tomcat:
+      time-between-eviction-runs-millis: 3000
+
+mybatis:
+  type-aliases-package: com.example.demo.entity
+  mapper-locations: com/example/demo/mapper/*.xml
+  configuration:
+    mapUnderscoreToCamelCase: true
+    logImpl: org.apache.ibatis.logging.stdout.StdOutImpl
+    typeAliasesPackage: com.jsptpd.gayg.modules
+
+server:
+  port: 8089
+
+logging:
+  level:
+    root: info
+  config: classpath:logback.xml
+  path: /home/bus

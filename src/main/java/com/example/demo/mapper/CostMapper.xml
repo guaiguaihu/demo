@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.ICostDAO" >
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.Cost" >
+    <id column="cost_id" property="costId" jdbcType="INTEGER" />
+    <result column="cost_define_id" property="costDefineId" jdbcType="INTEGER" />
+    <result column="cost_related_model" property="costRelatedModel" jdbcType="VARCHAR" />
+    <result column="cost_related_id" property="costRelatedId" jdbcType="INTEGER" />
+    <result column="cost_name" property="costName" jdbcType="VARCHAR" />
+    <result column="cost_amount" property="costAmount" jdbcType="DECIMAL" />
+    <result column="reimbursementor" property="reimbursementor" jdbcType="VARCHAR" />
+    <result column="reimbursement_date" property="reimbursementDate" jdbcType="DATE" />
+    <result column="add_name" property="addName" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="DATE" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="delete_name" property="deleteName" jdbcType="VARCHAR" />
+    <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cost_id, cost_define_id, cost_related_model, cost_related_id, cost_name, cost_amount, 
+    reimbursementor, reimbursement_date, add_name, add_time, delete_flag, delete_name, 
+    delete_time, remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from aub_cost
+    where cost_id = #{costId,jdbcType=INTEGER}
+  </select>
+  <insert id="insert" parameterType="com.example.demo.entity.Cost" >
+    insert into aub_cost (cost_id, cost_define_id, cost_related_model, 
+      cost_related_id, cost_name, cost_amount, 
+      reimbursementor, reimbursement_date, add_name, 
+      add_time, remark)
+    values (#{costId,jdbcType=INTEGER}, #{costDefineId,jdbcType=INTEGER}, #{costRelatedModel,jdbcType=VARCHAR}, 
+      #{costRelatedId,jdbcType=INTEGER}, #{costName,jdbcType=VARCHAR}, #{costAmount,jdbcType=DECIMAL}, 
+      #{reimbursementor,jdbcType=VARCHAR}, #{reimbursementDate,jdbcType=DATE}, #{addName,jdbcType=VARCHAR}, 
+      #{addTime,jdbcType=DATE}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.Cost" >
+    update aub_cost
+    set cost_define_id = #{costDefineId,jdbcType=INTEGER},
+      cost_related_model = #{costRelatedModel,jdbcType=VARCHAR},
+      cost_related_id = #{costRelatedId,jdbcType=INTEGER},
+      cost_name = #{costName,jdbcType=VARCHAR},
+      cost_amount = #{costAmount,jdbcType=DECIMAL},
+      reimbursementor = #{reimbursementor,jdbcType=VARCHAR},
+      reimbursement_date = #{reimbursementDate,jdbcType=DATE},
+      add_name = #{addName,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=DATE},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER},
+      delete_name = #{deleteName,jdbcType=VARCHAR},
+      delete_time = #{deleteTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where cost_id = #{costId,jdbcType=INTEGER}
+  </update>
+
+  <delete id="delete" parameterType="com.example.demo.entity.Cost">
+    update aub_cost set delete_flag = 1,
+    delete_name = #{deleteName},
+    delete_time = sysdate()
+    where cost_id = #{costId}
+  </delete>
+
+  <select id="getListCostCount" parameterType="map" resultType="int">
+    select count(1)
+    from aub_cost where delete_flag = 0 <include refid="searchCondition"/>
+  </select>
+
+  <sql id="searchCondition">
+    <if test="cost.costName != null and cost.costName != ''">
+      and cost_name like concat('%',#{cost.costName},'%')
+    </if>
+    <if test="cost.costAmount != null and cost.costAmount != ''">
+      and cost_amount like concat('%',#{cost.costAmount},'%')
+    </if>
+  </sql>
+
+  <sql id="pagination">
+    cost_id > (#{page}-1)*#{limit} limit #{limit}
+  </sql>
+
+  <select id="listCost" parameterType="map" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from aub_cost where delete_flag = 0 <include refid="searchCondition"/> and <include refid="pagination"/>
+  </select>
+
+  <select id="getCost" parameterType="integer" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from aub_cost where cost_id = #{costId, jdbcType=INTEGER}
+  </select>
+</mapper>

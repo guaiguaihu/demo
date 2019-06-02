@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.IBusDAO" >
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.Bus" >
+    <result column="bus_id" property="busId" jdbcType="INTEGER" />
+    <result column="bus_no" property="busNo" jdbcType="VARCHAR" />
+    <result column="driver" property="driver" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="bus_model" property="busModel" jdbcType="INTEGER" />
+    <result column="add_name" property="addName" jdbcType="VARCHAR" />
+    <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+    <result column="update_name" property="updateName" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    bus_id, bus_no, driver, tel, bus_model, add_name, add_time, update_name, update_time,
+    remark
+  </sql>
+  <sql id="pagination">
+    bus_id > (#{page}-1)*#{limit} limit #{limit}
+  </sql>
+  <insert id="insert" parameterType="com.example.demo.entity.Bus" >
+    insert into aub_bus (bus_id, bus_no, driver, 
+      tel, bus_model, add_name,
+      add_time, update_name, update_time,
+      remark)
+    values (#{busId,jdbcType=INTEGER}, #{busNo,jdbcType=VARCHAR}, #{driver,jdbcType=VARCHAR},
+      #{tel,jdbcType=VARCHAR}, #{busModel,jdbcType=INTEGER}, #{addName,jdbcType=VARCHAR},
+      #{addTime,jdbcType=TIMESTAMP}, #{updateName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="update" parameterType="com.example.demo.entity.Bus" >
+    update aub_bus
+    <set>
+      <if test="busNo != null">
+          bus_no = #{busNo},
+      </if>
+      <if test="driver != null">
+        driver = #{driver},
+      </if>
+      <if test="tel != null">
+        tel = #{tel},
+      </if>
+      <if test="busModel != null">
+        bus_model = #{busModel},
+      </if>
+      <if test="remark != null">
+        remark = #{remark},
+      </if>
+        update_name = #{updateName},
+        update_time = #{updateTime},
+    </set>
+    where bus_id = #{busId}
+  </update>
+
+  <delete id="delete" parameterType="com.example.demo.entity.Bus">
+    update aub_bus set delete_flag = 1,
+    delete_name = #{deleteName},
+    delete_time = sysdate()
+    where bus_id = #{busId}
+  </delete>
+
+  <select id="getListBusCount" parameterType="map" resultType="int">
+    select count(1)
+    from aub_bus where delete_flag = 0 <include refid="searchCondition"/>
+  </select>
+
+  <sql id="searchCondition">
+    <if test="bus.busNo != null and bus.busNo != ''">
+      and bus_no like concat('%',#{bus.busNo},'%')
+    </if>
+    <if test="bus.driver != null and bus.driver != ''">
+      and driver like concat('%',#{bus.driver},'%')
+    </if>
+    <if test="bus.tel != null and bus.tel != ''">
+      and tel like concat('%',#{bus.tel},'%')
+    </if>
+    <if test="bus.busModel != null and bus.busModel != ''">
+      and bus_model = #{bus.busModel}
+    </if>
+  </sql>
+
+  <select id="listBus" parameterType="map" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from aub_bus where delete_flag = 0 <include refid="searchCondition"/> and <include refid="pagination"/>
+  </select>
+
+  <select id="getBus" parameterType="long" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from aub_bus where bus_id = #{busId, jdbcType=INTEGER}
+  </select>
+</mapper>
