@@ -107,6 +107,24 @@ public class Order {
      * 联系人
      */
     private String useBusContact;
+    private String route;
+    private String contactTel;
+
+    public String getContactTel() {
+        return contactTel;
+    }
+
+    public void setContactTel(String contactTel) {
+        this.contactTel = contactTel;
+    }
+
+    public String getRoute() {
+        return route;
+    }
+
+    public void setRoute(String route) {
+        this.route = route;
+    }
 
     public Integer getOrdId() {
         return ordId;

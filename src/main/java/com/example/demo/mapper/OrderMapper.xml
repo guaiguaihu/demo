@@ -23,12 +23,14 @@
     <result column="delete_time" property="deleteTime" jdbcType="TIMESTAMP" />
     <result column="use_bus_com" property="useBusCom" jdbcType="VARCHAR" />
     <result column="use_bus_contact" property="useBusContact" jdbcType="VARCHAR" />
+    <result column="route" property="route" jdbcType="VARCHAR" />
+    <result column="contact_tel" property="contactTel" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     ord_id, ord_type, use_bus_start_time, use_bus_end_time, contract_no, contract_amount, 
     pre_contract_amount, contain_cost, addr_get_on, addr_get_off, pay_type, remark, add_name, 
     add_time, update_name, update_time, delete_flag, delete_name, delete_time, use_bus_com, 
-    use_bus_contact
+    use_bus_contact,route,contact_tel
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -42,7 +44,7 @@
       pre_contract_amount, contain_cost, addr_get_on, 
       addr_get_off, pay_type, remark, 
       add_name, add_time, update_name, 
-      update_time,  use_bus_com, use_bus_contact
+      update_time,  use_bus_com, use_bus_contact,route,contact_tel
       )
     values (#{ordId,jdbcType=INTEGER}, #{ordType,jdbcType=VARCHAR}, #{useBusStartTime,jdbcType=TIMESTAMP}, 
       #{useBusEndTime,jdbcType=TIMESTAMP}, #{contractNo,jdbcType=VARCHAR}, #{contractAmount,jdbcType=DECIMAL}, 
@@ -50,6 +52,8 @@
       #{addrGetOff,jdbcType=VARCHAR}, #{payType,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
       #{addName,jdbcType=VARCHAR}, #{addTime,jdbcType=DATE}, #{updateName,jdbcType=VARCHAR}, 
       #{updateTime,jdbcType=DATE}, #{useBusCom,jdbcType=VARCHAR}, #{useBusContact,jdbcType=VARCHAR}
+      , #{route,jdbcType=VARCHAR}
+      , #{contactTel,jdbcType=VARCHAR}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.Order" >
@@ -69,6 +73,8 @@
       update_time = sysdate(),
       use_bus_com = #{useBusCom,jdbcType=VARCHAR},
       use_bus_contact = #{useBusContact,jdbcType=VARCHAR}
+      route = #{route,jdbcType=VARCHAR}
+      contact_tel = #{contactTel,jdbcType=VARCHAR}
     where ord_id = #{ordId,jdbcType=INTEGER}
   </update>
 
@@ -82,40 +88,46 @@
 
   <sql id="searchCondition">
     <if test="order.ordType != null and order.ordType != ''">
-      ord_type = #{ordType,jdbcType=VARCHAR}
+      ord_type = #{order.ordType,jdbcType=VARCHAR}
     </if>
     <if test="order.useBusStartTime != null and order.useBusStartTime != ''">
-      use_bus_start_time = #{useBusStartTime,jdbcType=TIMESTAMP}
+      use_bus_start_time = #{order.useBusStartTime,jdbcType=TIMESTAMP}
     </if>
     <if test="order.useBusEndTime != null and order.useBusEndTime != ''">
-      use_bus_end_time = #{useBusEndTime,jdbcType=TIMESTAMP}
+      use_bus_end_time = #{order.useBusEndTime,jdbcType=TIMESTAMP}
     </if>
     <if test="order.contractNo != null and order.contractNo != ''">
-      contract_no = #{contractNo,jdbcType=VARCHAR}
+      contract_no = #{order.contractNo,jdbcType=VARCHAR}
     </if>
     <if test="order.contractAmount != null and order.contractAmount != ''">
-      contract_amount = #{contractAmount,jdbcType=DECIMAL}
+      contract_amount = #{order.contractAmount,jdbcType=DECIMAL}
     </if>
     <if test="order.preContractAmount != null and order.preContractAmount != ''">
-      pre_contract_amount = #{preContractAmount,jdbcType=DECIMAL}
+      pre_contract_amount = #{order.preContractAmount,jdbcType=DECIMAL}
     </if>
     <if test="order.containCost != null and order.containCost != ''">
-      contain_cost = #{containCost,jdbcType=INTEGER}
+      contain_cost = #{order.containCost,jdbcType=INTEGER}
     </if>
     <if test="order.addrGetOn != null and order.addrGetOn != ''">
-      addr_get_on = #{addrGetOn,jdbcType=VARCHAR}
+      addr_get_on = #{order.addrGetOn,jdbcType=VARCHAR}
     </if>
     <if test="order.addrGetOff != null and order.addrGetOff != ''">
-      addr_get_off = #{addrGetOff,jdbcType=VARCHAR}
+      addr_get_off = #{order.addrGetOff,jdbcType=VARCHAR}
     </if>
     <if test="order.payType != null and order.payType != ''">
-      pay_type = #{payType,jdbcType=VARCHAR}
+      pay_type = #{order.payType,jdbcType=VARCHAR}
     </if>
     <if test="order.useBusCom != null and order.useBusCom != ''">
-      use_bus_com = #{useBusCom,jdbcType=VARCHAR}
+      use_bus_com = #{order.useBusCom,jdbcType=VARCHAR}
     </if>
     <if test="order.useBusContact != null and order.useBusContact != ''">
-      use_bus_contact = #{useBusContact,jdbcType=VARCHAR}
+      use_bus_contact = #{order.useBusContact,jdbcType=VARCHAR}
+    </if>
+    <if test="order.route != null and order.route != ''">
+      route = #{order.route,jdbcType=VARCHAR}
+    </if>
+    <if test="order.contactTel != null and order.contactTel != ''">
+        contact_tel = #{order.contactTel,jdbcType=VARCHAR}
     </if>
   </sql>
 

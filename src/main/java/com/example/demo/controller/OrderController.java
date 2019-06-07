@@ -85,6 +85,9 @@ public class OrderController extends BaseController {
                 ordersReConvertor.apply(orderDao.listOrder(orderDomain, orderDomain.getPage(), orderDomain.getLimit()));
         Items<OrderDomain> items = new Items();
         items.setTotal(orderDao.getListOrderCount(orderDomain, orderDomain.getPage(), orderDomain.getLimit()));
+        for (OrderDomain domain : domainList) {
+            domain.setBusList(orderBusDAO.listByOrdId(domain.getOrdId()));
+        }
         items.setItems(domainList);
         responseResult.setData(items);
         return responseResult;

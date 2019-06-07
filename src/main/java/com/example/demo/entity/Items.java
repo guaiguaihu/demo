@@ -1,10 +1,11 @@
 package com.example.demo.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Items<T> {
     Integer total;
-    List<T> items;
+    List<T> items = new ArrayList<>();
 
     public Integer getTotal() {
         return total;

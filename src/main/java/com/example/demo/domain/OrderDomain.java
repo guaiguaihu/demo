@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class OrderDomain extends BaseDomain {
     private int page;
     private int limit;
 
-    private List<OrderBusDomain> busList;
+    private List<OrderBusDomain> busList = new ArrayList<>();
 
     /**
      * 订单表主键
@@ -119,6 +120,24 @@ public class OrderDomain extends BaseDomain {
      * 联系人
      */
     private String useBusContact;
+    private String route;
+    private String contactTel;
+
+    public String getContactTel() {
+        return contactTel;
+    }
+
+    public void setContactTel(String contactTel) {
+        this.contactTel = contactTel;
+    }
+
+    public String getRoute() {
+        return route;
+    }
+
+    public void setRoute(String route) {
+        this.route = route;
+    }
 
     public Integer getOrdId() {
         return ordId;
