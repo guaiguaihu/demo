@@ -1,5 +1,7 @@
 package com.example.demo.domain;
 
+import java.util.Date;
+
 /**
  * OrderBusDomain
  *
@@ -7,6 +9,7 @@ package com.example.demo.domain;
  * @date 2019/5/31
  **/
 public class OrderBusDomain extends BaseDomain {
+    private Integer ordBusId;
     private Integer ordId;
     private Integer busId;
     private String route;
@@ -15,6 +18,32 @@ public class OrderBusDomain extends BaseDomain {
     private String driver;
     private String tel;
     private String remark;
+    private Date useBusStartTime;
+    private Date useBusEndTime;
+
+    public Date getUseBusStartTime() {
+        return useBusStartTime;
+    }
+
+    public void setUseBusStartTime(Date useBusStartTime) {
+        this.useBusStartTime = useBusStartTime;
+    }
+
+    public Date getUseBusEndTime() {
+        return useBusEndTime;
+    }
+
+    public void setUseBusEndTime(Date useBusEndTime) {
+        this.useBusEndTime = useBusEndTime;
+    }
+
+    public Integer getOrdBusId() {
+        return ordBusId;
+    }
+
+    public void setOrdBusId(Integer ordBusId) {
+        this.ordBusId = ordBusId;
+    }
 
     public String getBusNo() {
         return busNo;

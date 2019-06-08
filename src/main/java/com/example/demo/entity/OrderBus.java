@@ -6,7 +6,7 @@ public class OrderBus {
     /**
      * 主键
      */
-    private Integer recid;
+    private Integer ordBusId;
 
     /**
      * 订单ID，订单表主键
@@ -43,12 +43,12 @@ public class OrderBus {
      */
     private Date updateTime;
 
-    public Integer getRecid() {
-        return recid;
+    public Integer getOrdBusId() {
+        return ordBusId;
     }
 
-    public void setRecid(Integer recid) {
-        this.recid = recid;
+    public void setOrdBusId(Integer ordBusId) {
+        this.ordBusId = ordBusId;
     }
 
     public Integer getOrdId() {

@@ -88,46 +88,46 @@
 
   <sql id="searchCondition">
     <if test="order.ordType != null and order.ordType != ''">
-      ord_type = #{order.ordType,jdbcType=VARCHAR}
+      and ord_type = #{order.ordType,jdbcType=VARCHAR}
     </if>
-    <if test="order.useBusStartTime != null and order.useBusStartTime != ''">
-      use_bus_start_time = #{order.useBusStartTime,jdbcType=TIMESTAMP}
+    <if test="order.useBusStartTime != null">
+      and use_bus_start_time > #{order.useBusStartTime,jdbcType=TIMESTAMP}
     </if>
-    <if test="order.useBusEndTime != null and order.useBusEndTime != ''">
-      use_bus_end_time = #{order.useBusEndTime,jdbcType=TIMESTAMP}
+    <if test="order.useBusEndTime != null">
+      and use_bus_end_time &lt; #{order.useBusEndTime,jdbcType=TIMESTAMP}
     </if>
     <if test="order.contractNo != null and order.contractNo != ''">
-      contract_no = #{order.contractNo,jdbcType=VARCHAR}
+      and contract_no = #{order.contractNo,jdbcType=VARCHAR}
     </if>
     <if test="order.contractAmount != null and order.contractAmount != ''">
-      contract_amount = #{order.contractAmount,jdbcType=DECIMAL}
+      and contract_amount = #{order.contractAmount,jdbcType=DECIMAL}
     </if>
     <if test="order.preContractAmount != null and order.preContractAmount != ''">
-      pre_contract_amount = #{order.preContractAmount,jdbcType=DECIMAL}
+      and pre_contract_amount = #{order.preContractAmount,jdbcType=DECIMAL}
     </if>
     <if test="order.containCost != null and order.containCost != ''">
-      contain_cost = #{order.containCost,jdbcType=INTEGER}
+      and contain_cost = #{order.containCost,jdbcType=INTEGER}
     </if>
     <if test="order.addrGetOn != null and order.addrGetOn != ''">
-      addr_get_on = #{order.addrGetOn,jdbcType=VARCHAR}
+      and addr_get_on = #{order.addrGetOn,jdbcType=VARCHAR}
     </if>
     <if test="order.addrGetOff != null and order.addrGetOff != ''">
       addr_get_off = #{order.addrGetOff,jdbcType=VARCHAR}
     </if>
     <if test="order.payType != null and order.payType != ''">
-      pay_type = #{order.payType,jdbcType=VARCHAR}
+      and pay_type = #{order.payType,jdbcType=VARCHAR}
     </if>
     <if test="order.useBusCom != null and order.useBusCom != ''">
-      use_bus_com = #{order.useBusCom,jdbcType=VARCHAR}
+      and use_bus_com = #{order.useBusCom,jdbcType=VARCHAR}
     </if>
     <if test="order.useBusContact != null and order.useBusContact != ''">
-      use_bus_contact = #{order.useBusContact,jdbcType=VARCHAR}
+      and use_bus_contact = #{order.useBusContact,jdbcType=VARCHAR}
     </if>
     <if test="order.route != null and order.route != ''">
-      route = #{order.route,jdbcType=VARCHAR}
+      and route = #{order.route,jdbcType=VARCHAR}
     </if>
     <if test="order.contactTel != null and order.contactTel != ''">
-        contact_tel = #{order.contactTel,jdbcType=VARCHAR}
+      and contact_tel = #{order.contactTel,jdbcType=VARCHAR}
     </if>
   </sql>
 
