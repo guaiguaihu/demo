@@ -1,5 +1,7 @@
 package com.example.demo.domain;
 
+import java.util.Date;
+
 /**
  * BusDomain
  *
@@ -15,6 +17,33 @@ public class BusDomain extends BaseDomain{
     private String driver;
     private String tel;
     private String remark;
+    private String status;
+    private Date useBusStartTime;
+    private Date useBusEndTime;
+
+    public Date getUseBusStartTime() {
+        return useBusStartTime;
+    }
+
+    public void setUseBusStartTime(Date useBusStartTime) {
+        this.useBusStartTime = useBusStartTime;
+    }
+
+    public Date getUseBusEndTime() {
+        return useBusEndTime;
+    }
+
+    public void setUseBusEndTime(Date useBusEndTime) {
+        this.useBusEndTime = useBusEndTime;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public int getPage() {
         return page;

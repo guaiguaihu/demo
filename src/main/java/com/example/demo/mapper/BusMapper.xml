@@ -62,9 +62,17 @@
     where bus_id = #{busId}
   </delete>
 
-  <select id="getListBusCount" parameterType="map" resultType="int">
+  <select id="getListBusCount" parameterType="map" resultType="int" flushCache="false">
     select count(1)
-    from aub_bus where delete_flag = 0 <include refid="searchCondition"/>
+    from aub_bus a where delete_flag = 0
+    and not EXISTS (select b.ord_bus_id FROM aub_order_bus b INNER JOIN aub_order c
+    on b.ord_id= c.ord_id
+    and (c.use_bus_start_time &lt;= #{bus.useBusStartTime,jdbcType=TIMESTAMP}
+    and c.use_bus_end_time > #{bus.useBusStartTime,jdbcType=TIMESTAMP})
+    or (c.use_bus_start_time &lt;= #{bus.useBusEndTime,jdbcType=TIMESTAMP}
+    and c.use_bus_end_time > #{bus.useBusEndTime,jdbcType=TIMESTAMP})
+    where a.bus_id=b.bus_id)
+    <include refid="searchCondition"/>
   </select>
 
   <sql id="searchCondition">
@@ -82,12 +90,20 @@
     </if>
   </sql>
 
-  <select id="listBus" parameterType="map" resultMap="BaseResultMap">
+  <select id="listBus" parameterType="map" resultMap="BaseResultMap" flushCache="false">
     select <include refid="Base_Column_List"/>
-    from aub_bus where delete_flag = 0 <include refid="searchCondition"/> and <include refid="pagination"/>
+    from aub_bus a where delete_flag = 0
+    and not EXISTS (select b.ord_bus_id FROM aub_order_bus b INNER JOIN aub_order c
+        on b.ord_id= c.ord_id
+        and (c.use_bus_start_time &lt;= #{bus.useBusStartTime,jdbcType=TIMESTAMP}
+            and c.use_bus_end_time > #{bus.useBusStartTime,jdbcType=TIMESTAMP})
+        or (c.use_bus_start_time &lt;= #{bus.useBusEndTime,jdbcType=TIMESTAMP}
+            and c.use_bus_end_time > #{bus.useBusEndTime,jdbcType=TIMESTAMP})
+        where a.bus_id=b.bus_id)
+     <include refid="searchCondition"/> and <include refid="pagination"/>
   </select>
 
-  <select id="getBus" parameterType="long" resultMap="BaseResultMap">
+  <select id="getBus" parameterType="long" resultMap="BaseResultMap" flushCache="false">
     select <include refid="Base_Column_List"/>
     from aub_bus where bus_id = #{busId, jdbcType=INTEGER}
   </select>
