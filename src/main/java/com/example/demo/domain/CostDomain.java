@@ -1,6 +1,8 @@
 package com.example.demo.domain;
 
 
+import java.util.Date;
+
 /**
  * CostDomain
  *
@@ -16,6 +18,33 @@ public class CostDomain extends BaseDomain {
     private String remark;
     private String costRelatedModel;
     private Integer costRelatedId;
+    private BusDomain busDomain;
+    private Date useBusStartTime;
+    private Date useBusEndTime;
+
+    public Date getUseBusStartTime() {
+        return useBusStartTime;
+    }
+
+    public void setUseBusStartTime(Date useBusStartTime) {
+        this.useBusStartTime = useBusStartTime;
+    }
+
+    public Date getUseBusEndTime() {
+        return useBusEndTime;
+    }
+
+    public void setUseBusEndTime(Date useBusEndTime) {
+        this.useBusEndTime = useBusEndTime;
+    }
+
+    public BusDomain getBusDomain() {
+        return busDomain;
+    }
+
+    public void setBusDomain(BusDomain busDomain) {
+        this.busDomain = busDomain;
+    }
 
     public String getCostName() {
         return costName;

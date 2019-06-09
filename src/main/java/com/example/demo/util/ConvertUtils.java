@@ -119,6 +119,7 @@ public class ConvertUtils {
             CostDomain cost = new CostDomain();
             BeanUtils.copyProperties(costDomain, cost);
             OperatorInfoUtil.fillOperateInfo(costDomain);
+            cost.setCostAmount(String.valueOf(costDomain.getCostAmount()));
             costList.add(cost);
         }
         return costList;

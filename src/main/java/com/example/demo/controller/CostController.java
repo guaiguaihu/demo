@@ -1,12 +1,15 @@
 package com.example.demo.controller;
 
+import com.example.demo.dao.IBusDAO;
 import com.example.demo.dao.ICostDAO;
+import com.example.demo.dao.IOrderBusDAO;
+import com.example.demo.dao.IOrderDAO;
+import com.example.demo.domain.BusDomain;
 import com.example.demo.domain.CostDomain;
-import com.example.demo.entity.Bus;
-import com.example.demo.entity.Cost;
-import com.example.demo.entity.Items;
-import com.example.demo.entity.ResponseResult;
+import com.example.demo.entity.*;
+import com.example.demo.service.IOrderService;
 import com.example.demo.util.OperatorInfoUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +28,12 @@ public class CostController extends BaseController{
 
     @Autowired
     private ICostDAO costDAO;
+    @Autowired
+    private IOrderBusDAO orderBusDAO;
+    @Autowired
+    private IBusDAO busDAO;
+    @Autowired
+    private IOrderDAO orderDAO;
 
     @RequestMapping(value = "cost", method = RequestMethod.POST)
     public ResponseResult addCost(@RequestBody CostDomain costDomain){
@@ -44,6 +53,19 @@ public class CostController extends BaseController{
         responseResult.setCode(STATUS_SUCCESS);
         List<CostDomain> domainList =
                 costListReConvertor.apply(costDAO.listCost(costDomain, costDomain.getPage(), costDomain.getLimit()));
+        for (CostDomain domain : domainList) {
+            Bus bus;
+            if("order".equals(domain.getCostRelatedModel())){
+                OrderBus orderBus = orderBusDAO.selectByPrimaryKey(domain.getCostRelatedId());
+                Order order = orderDAO.selectByPrimaryKey(orderBus.getOrdId());
+                domain.setUseBusStartTime(order.getUseBusStartTime());
+                domain.setUseBusEndTime(order.getUseBusEndTime());
+                bus = busDAO.getBus(Long.valueOf(orderBus.getBusId()));
+            } else {
+                bus = busDAO.getBus(Long.valueOf(domain.getCostRelatedId()));
+            }
+            domain.setBusDomain(busReConvertor.apply(bus));
+        }
         Items<CostDomain> items = new Items();
         items.setTotal(costDAO.getListCostCount(costDomain, costDomain.getPage(), costDomain.getLimit()));
         items.setItems(domainList);
