@@ -1,6 +1,7 @@
 package com.example.demo.domain;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * BusDomain
@@ -20,6 +21,15 @@ public class BusDomain extends BaseDomain{
     private String status;
     private Date useBusStartTime;
     private Date useBusEndTime;
+    private List<OrderDomain> orderDomainList;
+
+    public List<OrderDomain> getOrderDomainList() {
+        return orderDomainList;
+    }
+
+    public void setOrderDomainList(List<OrderDomain> orderDomainList) {
+        this.orderDomainList = orderDomainList;
+    }
 
     public Date getUseBusStartTime() {
         return useBusStartTime;

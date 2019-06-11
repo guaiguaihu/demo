@@ -149,4 +149,21 @@
     select <include refid="Base_Column_List"/>
     from aub_order where ord_id = #{ordId, jdbcType=INTEGER}
   </select>
+
+  <sql id="Using_Order_Column_List" >
+    a.ord_id, a.ord_type, a.use_bus_start_time, a.use_bus_end_time, a.contract_no, a.contract_amount,
+    a.pre_contract_amount, a.contain_cost, a.addr_get_on, a.addr_get_off, a.pay_type, a.remark, a.add_name,
+    a.add_time, a.update_name, a.update_time, a.delete_flag, a.delete_name, a.delete_time, a.use_bus_com,
+    a.use_bus_contact,a.route,a.contact_tel
+  </sql>
+
+  <select id="listUsingOrder" parameterType="integer" resultMap="BaseResultMap" flushCache="false">
+    select <include refid="Using_Order_Column_List"/>
+    from aub_order a,aub_order_bus b,aub_bus c
+    where a.ord_id=b.ord_id
+    and b.bus_id=c.bus_id
+    and c.bus_id=#{busId, jdbcType=INTEGER}
+    and a.use_bus_start_time>=SYSDATE()
+    and a.delete_flag=0
+  </select>
 </mapper>

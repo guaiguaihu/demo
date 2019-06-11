@@ -1,13 +1,13 @@
 package com.example.demo.controller;
 
 import com.example.demo.dao.IBusDAO;
+import com.example.demo.dao.IOrderDAO;
 import com.example.demo.domain.BusDomain;
-import com.example.demo.entity.Bus;
-import com.example.demo.entity.Item;
-import com.example.demo.entity.Items;
-import com.example.demo.entity.ResponseResult;
+import com.example.demo.domain.OrderDomain;
+import com.example.demo.entity.*;
 import com.example.demo.util.OperatorInfoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +25,8 @@ public class BusController extends BaseController {
 
     @Autowired
     private IBusDAO busDao;
+    @Autowired
+    private IOrderDAO orderDAO;
 
     @RequestMapping(value = "/bus", method = RequestMethod.POST)
     public ResponseResult addBus(@RequestBody BusDomain bus){
@@ -77,6 +79,14 @@ public class BusController extends BaseController {
         Items<BusDomain> items = new Items();
         items.setTotal(busDao.getListBusCount(busDomain, busDomain.getPage(), busDomain.getLimit()));
         items.setItems(domainList);
+        for (BusDomain domain : domainList) {
+            domain.setOrderDomainList(ordersReConvertor.apply(orderDAO.listUsingOrder(domain.getBusId())));
+            if(!CollectionUtils.isEmpty(domain.getOrderDomainList())){
+                domain.setStatus("已预定");
+            } else {
+                domain.setStatus("未预定");
+            }
+        }
         responseResult.setData(items);
         return responseResult;
     }

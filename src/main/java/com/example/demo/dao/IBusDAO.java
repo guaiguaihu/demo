@@ -1,6 +1,7 @@
 package com.example.demo.dao;
 
 import com.example.demo.domain.BusDomain;
+import com.example.demo.domain.OrderDomain;
 import com.example.demo.entity.Bus;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

@@ -21,4 +21,6 @@ public interface IOrderDAO {
     List<Order> listOrder(@Param("order") OrderDomain orderDomain, @Param("page") int page, @Param("limit") int limit);
 
     Order getOrder(@Param("ordId") Integer ordId);
+
+    List<Order> listUsingOrder(@Param("busId") Integer busId);
 }
