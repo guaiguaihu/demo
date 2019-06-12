@@ -72,8 +72,8 @@
       update_name = #{updateName,jdbcType=VARCHAR},
       update_time = sysdate(),
       use_bus_com = #{useBusCom,jdbcType=VARCHAR},
-      use_bus_contact = #{useBusContact,jdbcType=VARCHAR}
-      route = #{route,jdbcType=VARCHAR}
+      use_bus_contact = #{useBusContact,jdbcType=VARCHAR},
+      route = #{route,jdbcType=VARCHAR},
       contact_tel = #{contactTel,jdbcType=VARCHAR}
     where ord_id = #{ordId,jdbcType=INTEGER}
   </update>

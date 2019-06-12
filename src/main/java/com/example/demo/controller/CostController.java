@@ -52,7 +52,7 @@ public class CostController extends BaseController{
         ResponseResult responseResult = new ResponseResult();
         responseResult.setCode(STATUS_SUCCESS);
         List<CostDomain> domainList =
-                costListReConvertor.apply(costDAO.listCost(costDomain, costDomain.getPage(), costDomain.getLimit()));
+                costListReConvertor.apply(costDAO.listCost(costDomain, (costDomain.getPage() - 1) * costDomain.getLimit(), costDomain.getLimit()));
         for (CostDomain domain : domainList) {
             Bus bus;
             if("order".equals(domain.getCostRelatedModel())){

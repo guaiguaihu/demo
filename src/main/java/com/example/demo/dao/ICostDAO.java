@@ -21,7 +21,7 @@ public interface ICostDAO {
 
     Integer getListCostCount(@Param("cost") CostDomain costDomain, @Param("page") int page, @Param("limit") int limit);
 
-    List<Cost> listCost(@Param("cost") CostDomain costDomain, @Param("page") int page, @Param("limit") int limit);
+    List<Cost> listCost(@Param("cost") CostDomain costDomain, @Param("startRecord") int page, @Param("limit") int limit);
 
     Cost getCost(@Param("costId") Integer costId);
 }
