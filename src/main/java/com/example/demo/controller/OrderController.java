@@ -61,9 +61,7 @@ public class OrderController extends BaseController {
     public ResponseResult deleteOrder(@PathVariable Integer ordId){
         ResponseResult responseResult = new ResponseResult();
         responseResult.setCode(STATUS_SUCCESS);
-        Order order = orderDao.getOrder(ordId);
-        OperatorInfoUtil.fillDeleteInfo(order);
-        orderDao.delete(order);
+        orderService.deleteOrder(ordId);
         return responseResult;
     }
 

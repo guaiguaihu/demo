@@ -16,4 +16,5 @@ import java.util.List;
 public interface IOrderService {
     void saveOrder(Order order, List<OrderBus> busList);
     void editOrder(Order order, List<OrderBus> busList);
+    void deleteOrder(Integer ordId);
 }

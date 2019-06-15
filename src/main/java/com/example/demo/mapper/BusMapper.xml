@@ -66,12 +66,12 @@
     select count(1)
     from aub_bus a where delete_flag = 0
     and not EXISTS (select b.ord_bus_id FROM aub_order_bus b INNER JOIN aub_order c
-    on b.ord_id= c.ord_id
-    and (c.use_bus_start_time &lt;= #{bus.useBusStartTime,jdbcType=TIMESTAMP}
-    and c.use_bus_end_time > #{bus.useBusStartTime,jdbcType=TIMESTAMP})
-    or (c.use_bus_start_time &lt;= #{bus.useBusEndTime,jdbcType=TIMESTAMP}
-    and c.use_bus_end_time > #{bus.useBusEndTime,jdbcType=TIMESTAMP})
-    where a.bus_id=b.bus_id)
+      on b.ord_id= c.ord_id
+      and (c.use_bus_start_time &lt;= #{bus.useBusStartTime,jdbcType=TIMESTAMP}
+      and c.use_bus_end_time > #{bus.useBusStartTime,jdbcType=TIMESTAMP})
+      or (c.use_bus_start_time &lt;= #{bus.useBusEndTime,jdbcType=TIMESTAMP}
+      and c.use_bus_end_time > #{bus.useBusEndTime,jdbcType=TIMESTAMP})
+      where a.bus_id=b.bus_id  and b.delete_flag=0)
     <include refid="searchCondition"/>
   </select>
 
@@ -95,11 +95,12 @@
     from aub_bus a where delete_flag = 0
     and not EXISTS (select b.ord_bus_id FROM aub_order_bus b INNER JOIN aub_order c
         on b.ord_id= c.ord_id
+        and b.delete_flag=0
         and (c.use_bus_start_time &lt;= #{bus.useBusStartTime,jdbcType=TIMESTAMP}
             and c.use_bus_end_time > #{bus.useBusStartTime,jdbcType=TIMESTAMP})
         or (c.use_bus_start_time &lt;= #{bus.useBusEndTime,jdbcType=TIMESTAMP}
             and c.use_bus_end_time > #{bus.useBusEndTime,jdbcType=TIMESTAMP})
-        where a.bus_id=b.bus_id)
+        where a.bus_id=b.bus_id and b.delete_flag=0)
      <include refid="searchCondition"/> and <include refid="pagination"/>
   </select>
 

@@ -48,4 +48,11 @@ public class OrderServiceImpl implements IOrderService {
             orderBusDAO.insert(bus);
         }
     }
+
+    @Override
+    public void deleteOrder(Integer ordId) {
+        orderDAO.delete(ordId, OperatorInfoUtil.getOperateUser().getUsername());
+        orderBusDAO.deleteByOrdId(ordId);
+
+    }
 }

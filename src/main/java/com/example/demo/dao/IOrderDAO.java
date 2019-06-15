@@ -14,7 +14,7 @@ public interface IOrderDAO {
 
     int updateByPrimaryKey(Order record);
 
-    int delete(Order order);
+    int delete(@Param("ordId") Integer ordId, @Param("deleteName") String deleteName);
 
     Integer getListOrderCount(@Param("order") OrderDomain orderDomain, @Param("page") int page, @Param("limit") int limit);
 

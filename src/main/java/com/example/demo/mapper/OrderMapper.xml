@@ -78,7 +78,7 @@
     where ord_id = #{ordId,jdbcType=INTEGER}
   </update>
 
-  <update id="delete" parameterType="com.example.demo.entity.Order">
+  <update id="delete" parameterType="map">
     update aub_order
     set delete_name = #{deleteName,jdbcType=VARCHAR},
       delete_time = sysdate(),
