@@ -10,25 +10,15 @@
     <result column="add_time" property="addTime" jdbcType="DATE" />
     <result column="update_name" property="updateName" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="DATE" />
-  </resultMap>
-
-  <resultMap id="BusOrderResultMap" type="com.example.demo.domain.OrderBusDomain" extends="BaseResultMap">
-    <result column="ord_bus_id" property="ordBusId" jdbcType="INTEGER" />
-    <result column="ord_id" property="ordId" jdbcType="INTEGER" />
-    <result column="bus_id" property="busId" jdbcType="INTEGER" />
     <result column="bus_no" property="busNo" jdbcType="VARCHAR" />
     <result column="driver" property="driver" jdbcType="VARCHAR" />
     <result column="tel" property="tel" jdbcType="VARCHAR" />
-    <result column="bus_model" property="busModel" jdbcType="INTEGER" />
-    <result column="route" property="route" jdbcType="VARCHAR" />
-    <result column="add_name" property="addName" jdbcType="VARCHAR" />
-    <result column="add_time" property="addTime" jdbcType="DATE" />
-    <result column="update_name" property="updateName" jdbcType="VARCHAR" />
-    <result column="update_time" property="updateTime" jdbcType="DATE" />
+    <result column="bus_model" property="busModel" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
   </resultMap>
-
   <sql id="Base_Column_List" >
-    ord_bus_id, ord_id, bus_id, route, add_name, add_time, update_name, update_time
+    ord_bus_id, ord_id, bus_id, route, add_name, add_time, update_name, update_time, 
+    bus_no, driver, tel, bus_model, delete_flag
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -36,26 +26,17 @@
     from aub_order_bus
     where ord_bus_id = #{ordBusId,jdbcType=INTEGER}
   </select>
-
-  <sql id="BusOrder_bus_Column_List" >
-    a.ord_bus_id, a.ord_id, a.bus_id, a.route, b.bus_no, b.driver, b.tel, b.bus_model, b.remark, a.add_name, a.add_time, a.update_name, a.update_time
-  </sql>
-
-  <select id="listByOrdId" parameterType="integer" resultMap="BusOrderResultMap">
-    select
-    <include refid="BusOrder_bus_Column_List" />
-    from aub_order_bus a,aub_bus b
-    where ord_id = #{ordId,jdbcType=INTEGER}
-      and a.bus_id=b.bus_id
-  </select>
-
   <insert id="insert" parameterType="com.example.demo.entity.OrderBus" >
-    insert into aub_order_bus (ord_bus_id, ord_id, bus_id,
+    insert into aub_order_bus (ord_bus_id, ord_id, bus_id, 
       route, add_name, add_time, 
-      update_name, update_time)
-    values (#{ordBusId,jdbcType=INTEGER}, #{ordId,jdbcType=INTEGER}, #{busId,jdbcType=INTEGER},
+      update_name, update_time, bus_no, 
+      driver, tel, bus_model, 
+      delete_flag)
+    values (#{ordBusId,jdbcType=INTEGER}, #{ordId,jdbcType=INTEGER}, #{busId,jdbcType=INTEGER}, 
       #{route,jdbcType=VARCHAR}, #{addName,jdbcType=VARCHAR}, #{addTime,jdbcType=DATE}, 
-      #{updateName,jdbcType=VARCHAR}, #{updateTime,jdbcType=DATE})
+      #{updateName,jdbcType=VARCHAR}, #{updateTime,jdbcType=DATE}, #{busNo,jdbcType=VARCHAR}, 
+      #{driver,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{busModel,jdbcType=VARCHAR}, 
+      #{deleteFlag,jdbcType=INTEGER})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.OrderBus" >
     update aub_order_bus
@@ -65,10 +46,25 @@
       add_name = #{addName,jdbcType=VARCHAR},
       add_time = #{addTime,jdbcType=DATE},
       update_name = #{updateName,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=DATE}
+      update_time = #{updateTime,jdbcType=DATE},
+      bus_no = #{busNo,jdbcType=VARCHAR},
+      driver = #{driver,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      bus_model = #{busModel,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=INTEGER}
     where ord_bus_id = #{ordBusId,jdbcType=INTEGER}
   </update>
+
+  <select id="listByOrdId" parameterType="integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from aub_order_bus
+    where ord_id = #{ordId,jdbcType=INTEGER}
+    and delete_flag=0
+  </select>
+
   <delete id="deleteByOrdId" parameterType="integer">
-    delete from aub_order_bus where ord_id = #{ordId,jdbcType=INTEGER}
+    update aub_order_bus set delete_flag=1 where ord_id = #{ordId,jdbcType=INTEGER}
   </delete>
+
 </mapper>

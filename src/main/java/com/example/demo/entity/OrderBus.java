@@ -43,6 +43,31 @@ public class OrderBus {
      */
     private Date updateTime;
 
+    /**
+     * 车牌号
+     */
+    private String busNo;
+
+    /**
+     * 驾驶员
+     */
+    private String driver;
+
+    /**
+     * 驾驶员电话
+     */
+    private String tel;
+
+    /**
+     * 车型
+     */
+    private String busModel;
+
+    /**
+     * 删除标记：0未删除，1已删除
+     */
+    private Integer deleteFlag;
+
     public Integer getOrdBusId() {
         return ordBusId;
     }
@@ -105,5 +130,45 @@ public class OrderBus {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getBusNo() {
+        return busNo;
+    }
+
+    public void setBusNo(String busNo) {
+        this.busNo = busNo;
+    }
+
+    public String getDriver() {
+        return driver;
+    }
+
+    public void setDriver(String driver) {
+        this.driver = driver;
+    }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getBusModel() {
+        return busModel;
+    }
+
+    public void setBusModel(String busModel) {
+        this.busModel = busModel;
+    }
+
+    public Integer getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(Integer deleteFlag) {
+        this.deleteFlag = deleteFlag;
     }
 }

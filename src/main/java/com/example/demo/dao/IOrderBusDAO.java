@@ -11,11 +11,11 @@ import java.util.List;
 public interface IOrderBusDAO {
     int insert(OrderBus record);
 
-    OrderBus selectByPrimaryKey(Integer recid);
-
-    List<OrderBusDomain> listByOrdId(@Param("ordId") Integer ordId);
+    OrderBus selectByPrimaryKey(Integer ordBusId);
 
     int updateByPrimaryKey(OrderBus record);
+
+    List<OrderBusDomain> listByOrdId(@Param("ordId") Integer ordId);
 
     void deleteByOrdId(@Param("ordId") Integer ordId);
 }
