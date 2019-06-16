@@ -18,7 +18,7 @@ public interface IOrderDAO {
 
     Integer getListOrderCount(@Param("order") OrderDomain orderDomain, @Param("page") int page, @Param("limit") int limit);
 
-    List<Order> listOrder(@Param("order") OrderDomain orderDomain, @Param("page") int page, @Param("limit") int limit);
+    List<Order> listOrder(@Param("order") OrderDomain orderDomain, @Param("startRecord") int startRecord, @Param("limit") int limit);
 
     Order getOrder(@Param("ordId") Integer ordId);
 

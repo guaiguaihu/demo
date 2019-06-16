@@ -24,18 +24,4 @@ public class WebMvcConfig implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(new DateConverter());
     }
-
-    @Autowired
-    private Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder;
-
-    @Bean
-    public MappingJackson2HttpMessageConverter MappingJsonpHttpMessageConverter() {
-
-        ObjectMapper mapper = jackson2ObjectMapperBuilder.build();
-        DateFormat dateFormat = mapper.getDateFormat();
-        mapper.setDateFormat(new DemoDateFormat(dateFormat));
-        MappingJackson2HttpMessageConverter mappingJsonpHttpMessageConverter = new MappingJackson2HttpMessageConverter(
-                mapper);
-        return mappingJsonpHttpMessageConverter;
-    }
 }

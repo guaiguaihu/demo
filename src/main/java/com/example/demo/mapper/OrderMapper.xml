@@ -44,7 +44,7 @@
       pre_contract_amount, contain_cost, addr_get_on, 
       addr_get_off, pay_type, remark, 
       add_name, add_time, update_name, 
-      update_time,  use_bus_com, use_bus_contact,route,contact_tel
+      update_time,  use_bus_com, use_bus_contact,route,contact_tel,delete_flag
       )
     values (#{ordId,jdbcType=INTEGER}, #{ordType,jdbcType=VARCHAR}, #{useBusStartTime,jdbcType=TIMESTAMP}, 
       #{useBusEndTime,jdbcType=TIMESTAMP}, #{contractNo,jdbcType=VARCHAR}, #{contractAmount,jdbcType=DECIMAL}, 
@@ -53,7 +53,7 @@
       #{addName,jdbcType=VARCHAR}, #{addTime,jdbcType=DATE}, #{updateName,jdbcType=VARCHAR}, 
       #{updateTime,jdbcType=DATE}, #{useBusCom,jdbcType=VARCHAR}, #{useBusContact,jdbcType=VARCHAR}
       , #{route,jdbcType=VARCHAR}
-      , #{contactTel,jdbcType=VARCHAR}
+      , #{contactTel,jdbcType=VARCHAR},0
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.Order" >
@@ -132,7 +132,7 @@
   </sql>
 
   <sql id="pagination">
-    ord_id > (#{page}-1)*#{limit} limit #{limit}
+    order by ord_id limit #{startRecord},${limit}
   </sql>
 
   <select id="getListOrderCount" parameterType="map" resultType="int">
@@ -142,7 +142,10 @@
 
   <select id="listOrder" parameterType="map" resultMap="BaseResultMap">
     select <include refid="Base_Column_List"/>
-    from aub_order where delete_flag = 0 <include refid="searchCondition"/> and <include refid="pagination"/>
+    from aub_order
+    where delete_flag = 0
+      <include refid="searchCondition"/>
+      <include refid="pagination"/>
   </select>
 
   <select id="getOrder" parameterType="integer" resultMap="BaseResultMap">

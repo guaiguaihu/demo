@@ -80,7 +80,7 @@ public class OrderController extends BaseController {
         ResponseResult responseResult = new ResponseResult();
         responseResult.setCode(STATUS_SUCCESS);
         List<OrderDomain> domainList =
-                ordersReConvertor.apply(orderDao.listOrder(orderDomain, orderDomain.getPage(), orderDomain.getLimit()));
+                ordersReConvertor.apply(orderDao.listOrder(orderDomain, (orderDomain.getPage() - 1) * orderDomain.getLimit(), orderDomain.getLimit()));
         Items<OrderDomain> items = new Items();
         items.setTotal(orderDao.getListOrderCount(orderDomain, orderDomain.getPage(), orderDomain.getLimit()));
         for (OrderDomain domain : domainList) {

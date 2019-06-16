@@ -1,9 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.IBusDAO;
 import com.example.demo.dao.IOrderBusDAO;
 import com.example.demo.dao.IOrderDAO;
-import com.example.demo.entity.Bus;
 import com.example.demo.entity.Order;
 import com.example.demo.entity.OrderBus;
 import com.example.demo.util.OperatorInfoUtil;
@@ -45,6 +43,7 @@ public class OrderServiceImpl implements IOrderService {
         for (OrderBus bus : busList) {
             OperatorInfoUtil.fillOperateInfo(bus);
             bus.setOrdId(order.getOrdId());
+            bus.setOrdBusId(null);
             orderBusDAO.insert(bus);
         }
     }

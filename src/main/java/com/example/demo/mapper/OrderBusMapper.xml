@@ -36,7 +36,7 @@
       #{route,jdbcType=VARCHAR}, #{addName,jdbcType=VARCHAR}, #{addTime,jdbcType=DATE}, 
       #{updateName,jdbcType=VARCHAR}, #{updateTime,jdbcType=DATE}, #{busNo,jdbcType=VARCHAR}, 
       #{driver,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{busModel,jdbcType=VARCHAR}, 
-      #{deleteFlag,jdbcType=INTEGER})
+      0)
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.example.demo.entity.OrderBus" >
     update aub_order_bus
