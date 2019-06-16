@@ -57,6 +57,9 @@ public class CostController extends BaseController{
             Bus bus;
             if("order".equals(domain.getCostRelatedModel())){
                 OrderBus orderBus = orderBusDAO.selectByPrimaryKey(domain.getCostRelatedId());
+                if(orderBus == null){
+                    continue;
+                }
                 Order order = orderDAO.selectByPrimaryKey(orderBus.getOrdId());
                 domain.setUseBusStartTime(order.getUseBusStartTime());
                 domain.setUseBusEndTime(order.getUseBusEndTime());
