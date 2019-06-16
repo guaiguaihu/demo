@@ -97,7 +97,7 @@
       and use_bus_end_time &lt; #{order.useBusEndTime,jdbcType=TIMESTAMP}
     </if>
     <if test="order.contractNo != null and order.contractNo != ''">
-      and contract_no = #{order.contractNo,jdbcType=VARCHAR}
+      and contract_no like concat('%',#{order.contractNo},'%')
     </if>
     <if test="order.contractAmount != null and order.contractAmount != ''">
       and contract_amount = #{order.contractAmount,jdbcType=DECIMAL}
@@ -109,25 +109,25 @@
       and contain_cost = #{order.containCost,jdbcType=INTEGER}
     </if>
     <if test="order.addrGetOn != null and order.addrGetOn != ''">
-      and addr_get_on = #{order.addrGetOn,jdbcType=VARCHAR}
+      and addr_get_on like concat('%',#{order.addrGetOn},'%')
     </if>
     <if test="order.addrGetOff != null and order.addrGetOff != ''">
-      addr_get_off = #{order.addrGetOff,jdbcType=VARCHAR}
+      and addr_get_off like concat('%',#{order.addrGetOff},'%')
     </if>
     <if test="order.payType != null and order.payType != ''">
       and pay_type = #{order.payType,jdbcType=VARCHAR}
     </if>
     <if test="order.useBusCom != null and order.useBusCom != ''">
-      and use_bus_com = #{order.useBusCom,jdbcType=VARCHAR}
+      and use_bus_com like concat('%',#{order.useBusCom},'%')
     </if>
     <if test="order.useBusContact != null and order.useBusContact != ''">
-      and use_bus_contact = #{order.useBusContact,jdbcType=VARCHAR}
+      and use_bus_contact like concat('%',#{order.useBusContact},'%')
     </if>
     <if test="order.route != null and order.route != ''">
-      and route = #{order.route,jdbcType=VARCHAR}
+      and route like concat('%',#{order.route},'%')
     </if>
     <if test="order.contactTel != null and order.contactTel != ''">
-      and contact_tel = #{order.contactTel,jdbcType=VARCHAR}
+      and contact_tel like concat('%',#{order.contactTel},'%')
     </if>
   </sql>
 
