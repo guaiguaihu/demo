@@ -7,6 +7,7 @@ import com.example.demo.entity.OrderBus;
 import com.example.demo.util.OperatorInfoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class OrderServiceImpl implements IOrderService {
     IOrderBusDAO orderBusDAO;
 
     @Override
+    @Transactional
     public void saveOrder(Order order, List<OrderBus> busList) {
         OperatorInfoUtil.fillOperateInfo(order);
         order.setStatus(ACTIVE.getName());
