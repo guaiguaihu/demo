@@ -91,10 +91,10 @@
       and ord_type = #{order.ordType,jdbcType=VARCHAR}
     </if>
     <if test="order.useBusStartTime != null">
-      and use_bus_start_time > #{order.useBusStartTime,jdbcType=TIMESTAMP}
+      and use_bus_start_time >= #{order.useBusStartTime,jdbcType=TIMESTAMP}
     </if>
     <if test="order.useBusEndTime != null">
-      and use_bus_end_time &lt; #{order.useBusEndTime,jdbcType=TIMESTAMP}
+      and use_bus_start_time &lt;= #{order.useBusEndTime,jdbcType=TIMESTAMP}
     </if>
     <if test="order.contractNo != null and order.contractNo != ''">
       and contract_no like concat('%',#{order.contractNo},'%')

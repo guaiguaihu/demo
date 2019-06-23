@@ -55,9 +55,15 @@ mybatis:
 
 server:
   port: 8089
+  ssl:
+    key-store: michael.keystore
+    key-store-password: test1234
+    keyStoreType: JKS
+    keyAlias: testkey
 
 logging:
   level:
     root: info
   config: classpath:logback.xml
   path: /home/bus
+
