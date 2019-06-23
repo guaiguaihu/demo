@@ -25,6 +25,7 @@ public class OrderDomain extends BaseDomain {
      * 订单类型（外调）
      */
     private String ordType;
+    private String status;
 
     /**
      * 用车开始时间
@@ -337,5 +338,46 @@ public class OrderDomain extends BaseDomain {
 
     public void setBusList(List<OrderBusDomain> busList) {
         this.busList = busList;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "OrderDomain{" +
+                "page=" + page +
+                ", limit=" + limit +
+                ", busList=" + busList +
+                ", ordId=" + ordId +
+                ", ordType='" + ordType + '\'' +
+                ", status='" + status + '\'' +
+                ", useBusStartTime=" + useBusStartTime +
+                ", useBusEndTime=" + useBusEndTime +
+                ", contractNo='" + contractNo + '\'' +
+                ", contractAmount=" + contractAmount +
+                ", preContractAmount=" + preContractAmount +
+                ", containCost=" + containCost +
+                ", addrGetOn='" + addrGetOn + '\'' +
+                ", addrGetOff='" + addrGetOff + '\'' +
+                ", payType='" + payType + '\'' +
+                ", remark='" + remark + '\'' +
+                ", addName='" + addName + '\'' +
+                ", addTime=" + addTime +
+                ", updateName='" + updateName + '\'' +
+                ", updateTime=" + updateTime +
+                ", deleteFlag=" + deleteFlag +
+                ", deleteName='" + deleteName + '\'' +
+                ", deleteTime=" + deleteTime +
+                ", useBusCom='" + useBusCom + '\'' +
+                ", useBusContact='" + useBusContact + '\'' +
+                ", route='" + route + '\'' +
+                ", contactTel='" + contactTel + '\'' +
+                '}';
     }
 }

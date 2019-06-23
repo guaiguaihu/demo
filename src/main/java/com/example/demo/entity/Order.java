@@ -8,6 +8,8 @@ public class Order {
      */
     private Integer ordId;
 
+    private String status;
+
     /**
      * 订单类型（外调）
      */
@@ -292,5 +294,13 @@ public class Order {
 
     public void setUseBusContact(String useBusContact) {
         this.useBusContact = useBusContact;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
