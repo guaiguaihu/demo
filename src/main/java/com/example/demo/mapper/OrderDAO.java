@@ -1,4 +1,4 @@
-package com.example.demo.dao;
+package com.example.demo.mapper;
 
 import com.example.demo.domain.OrderDomain;
 import com.example.demo.entity.Order;
@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 @Mapper
-public interface IOrderDAO {
+public interface OrderDAO {
     int insert(Order record);
 
     Order selectByPrimaryKey(Integer ordId);

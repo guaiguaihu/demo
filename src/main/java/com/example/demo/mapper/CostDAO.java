@@ -1,4 +1,4 @@
-package com.example.demo.dao;
+package com.example.demo.mapper;
 
 import com.example.demo.domain.BusDomain;
 import com.example.demo.domain.CostDomain;
@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 @Mapper
-public interface ICostDAO {
+public interface CostDAO {
     int insert(Cost record);
 
     Cost selectByPrimaryKey(Integer costId);

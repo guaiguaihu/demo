@@ -1,15 +1,12 @@
 package com.example.demo.controller;
 
-import com.example.demo.dao.IBusDAO;
-import com.example.demo.dao.ICostDAO;
-import com.example.demo.dao.IOrderBusDAO;
-import com.example.demo.dao.IOrderDAO;
-import com.example.demo.domain.BusDomain;
+import com.example.demo.mapper.BusDAO;
+import com.example.demo.mapper.CostDAO;
+import com.example.demo.mapper.OrderBusDAO;
+import com.example.demo.mapper.OrderDAO;
 import com.example.demo.domain.CostDomain;
 import com.example.demo.entity.*;
-import com.example.demo.service.IOrderService;
 import com.example.demo.util.OperatorInfoUtil;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,13 +24,13 @@ import static com.example.demo.util.ConvertUtils.*;
 public class CostController extends BaseController{
 
     @Autowired
-    private ICostDAO costDAO;
+    private CostDAO costDAO;
     @Autowired
-    private IOrderBusDAO orderBusDAO;
+    private OrderBusDAO orderBusDAO;
     @Autowired
-    private IBusDAO busDAO;
+    private BusDAO busDAO;
     @Autowired
-    private IOrderDAO orderDAO;
+    private OrderDAO orderDAO;
 
     @RequestMapping(value = "cost", method = RequestMethod.POST)
     public ResponseResult addCost(@RequestBody CostDomain costDomain){

@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.IOrderBusDAO;
-import com.example.demo.dao.IOrderDAO;
+import com.example.demo.mapper.OrderBusDAO;
+import com.example.demo.mapper.OrderDAO;
 import com.example.demo.entity.Order;
 import com.example.demo.entity.OrderBus;
 import com.example.demo.util.OperatorInfoUtil;
@@ -24,10 +24,10 @@ import static com.example.demo.constant.OrderStatus.ORDER;
 @Service
 public class OrderServiceImpl implements IOrderService {
     @Autowired
-    IOrderDAO orderDAO;
+    OrderDAO orderDAO;
 
     @Autowired
-    IOrderBusDAO orderBusDAO;
+    OrderBusDAO orderBusDAO;
 
     @Override
     @Transactional

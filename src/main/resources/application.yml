@@ -45,13 +45,6 @@ spring:
       #允许出现单引号
       allow_single_quotes: true
     time-zone: Hongkong
-mybatis:
-  type-aliases-package: com.example.demo.entity
-  mapper-locations: com/example/demo/mapper/*.xml
-  configuration:
-    mapUnderscoreToCamelCase: true
-    logImpl: org.apache.ibatis.logging.stdout.StdOutImpl
-    typeAliasesPackage: com.jsptpd.gayg.modules
 
 server:
   port: 8089

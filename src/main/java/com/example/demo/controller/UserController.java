@@ -1,13 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.config.WebSecurityConfig;
-import com.example.demo.dao.IUserDAO;
+import com.example.demo.mapper.UserDAO;
 import com.example.demo.domain.UserDomain;
 import com.example.demo.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +14,7 @@ import java.util.List;
 @RestController
 public class UserController extends BaseController {
     @Autowired
-    private IUserDAO userDAO;
+    private UserDAO userDAO;
 
     @RequestMapping(value = "/table/list")
     public ResponseResult test2(String title){

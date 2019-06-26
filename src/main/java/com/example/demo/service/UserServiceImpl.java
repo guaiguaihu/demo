@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.IUserDAO;
+import com.example.demo.mapper.UserDAO;
 import com.example.demo.entity.User;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 public class UserServiceImpl implements IUserService{
 
     @Resource
-    private IUserDAO userDao;
+    private UserDAO userDao;
 
     @Override
     public void saveUser(User user) {

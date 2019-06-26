@@ -1,6 +1,5 @@
 package com.example.demo.util;
 
-import com.example.demo.dao.IBusDAO;
 import com.example.demo.domain.BusDomain;
 import com.example.demo.domain.CostDomain;
 import com.example.demo.domain.OrderBusDomain;
@@ -11,8 +10,6 @@ import com.example.demo.entity.Order;
 import com.example.demo.entity.OrderBus;
 import com.google.common.base.Function;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

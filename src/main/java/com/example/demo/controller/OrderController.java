@@ -1,16 +1,11 @@
 package com.example.demo.controller;
 
-import com.example.demo.dao.IOrderBusDAO;
-import com.example.demo.dao.IOrderDAO;
-import com.example.demo.domain.BusDomain;
-import com.example.demo.domain.OrderBusDomain;
+import com.example.demo.mapper.OrderBusDAO;
+import com.example.demo.mapper.OrderDAO;
 import com.example.demo.domain.OrderDomain;
 import com.example.demo.entity.Items;
-import com.example.demo.entity.Order;
 import com.example.demo.entity.ResponseResult;
 import com.example.demo.service.IOrderService;
-import com.example.demo.util.OperatorInfoUtil;
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,10 +23,10 @@ import static com.example.demo.util.ConvertUtils.*;
 public class OrderController extends BaseController {
 
     @Autowired
-    private IOrderDAO orderDao;
+    private OrderDAO orderDao;
 
     @Autowired
-    private IOrderBusDAO orderBusDAO;
+    private OrderBusDAO orderBusDAO;
 
     @Autowired
     private IOrderService orderService;

@@ -1,9 +1,8 @@
 package com.example.demo.controller;
 
-import com.example.demo.dao.IBusDAO;
-import com.example.demo.dao.IOrderDAO;
+import com.example.demo.mapper.BusDAO;
+import com.example.demo.mapper.OrderDAO;
 import com.example.demo.domain.BusDomain;
-import com.example.demo.domain.OrderDomain;
 import com.example.demo.entity.*;
 import com.example.demo.util.OperatorInfoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +23,9 @@ import static com.example.demo.util.ConvertUtils.*;
 public class BusController extends BaseController {
 
     @Autowired
-    private IBusDAO busDao;
+    private BusDAO busDao;
     @Autowired
-    private IOrderDAO orderDAO;
+    private OrderDAO orderDAO;
 
     @RequestMapping(value = "/bus", method = RequestMethod.POST)
     public ResponseResult addBus(@RequestBody BusDomain bus){

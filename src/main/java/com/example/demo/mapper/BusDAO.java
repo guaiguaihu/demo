@@ -1,4 +1,4 @@
-package com.example.demo.dao;
+package com.example.demo.mapper;
 
 import com.example.demo.domain.BusDomain;
 import com.example.demo.domain.OrderDomain;
@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 @Mapper
-public interface IBusDAO {
+public interface BusDAO {
     int insert(Bus bus);
     int update(Bus bus);
     int delete(Bus bus);
