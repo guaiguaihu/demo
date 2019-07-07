@@ -15,6 +15,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.demo.config.DateConverter.*;
+
 /**
  * ConvertUtils
  *
@@ -75,14 +77,20 @@ public class ConvertUtils {
         Order order = new Order();
         BeanUtils.copyProperties(o, order);
         order.setContainCost(o.getContainCost() ? 1 : 0);
+        order.setUseBusStartTime(replaceTime(o.getUseBusStartDate(), o.getUseBusStartTime()));
+        order.setUseBusEndTime(replaceTime(o.getUseBusEndDate(), o.getUseBusEndTime()));
         return order;
     };
 
     public static Function<Order, OrderDomain> orderReConvertor = o -> {
-        OrderDomain order = new OrderDomain();
-        BeanUtils.copyProperties(o, order);
-        order.setContainCost(1 == o.getContainCost());
-        return order;
+        OrderDomain orderDomain = new OrderDomain();
+        BeanUtils.copyProperties(o, orderDomain);
+        orderDomain.setContainCost(1 == o.getContainCost());
+        orderDomain.setUseBusStartDate(formatDate(o.getUseBusStartTime()));
+        orderDomain.setUseBusEndDate(formatDate(o.getUseBusEndTime()));
+        orderDomain.setUseBusStartTime(formatTime(o.getUseBusStartTime()));
+        orderDomain.setUseBusEndTime(formatTime(o.getUseBusEndTime()));
+        return orderDomain;
     };
 
     public static Function<List<Order>, List<OrderDomain>> ordersReConvertor = o -> {
@@ -91,6 +99,10 @@ public class ConvertUtils {
             OrderDomain orderDomain = new OrderDomain();
             BeanUtils.copyProperties(order, orderDomain);
             orderDomain.setContainCost(order.getContainCost() == 1);
+            orderDomain.setUseBusStartDate(formatDate(order.getUseBusStartTime()));
+            orderDomain.setUseBusEndDate(formatDate(order.getUseBusEndTime()));
+            orderDomain.setUseBusStartTime(formatTime(order.getUseBusStartTime()));
+            orderDomain.setUseBusEndTime(formatTime(order.getUseBusEndTime()));
             OperatorInfoUtil.fillOperateInfo(order);
             orderDomains.add(orderDomain);
         }

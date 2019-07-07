@@ -15,13 +15,14 @@ import java.util.List;
  * @date 2019/6/9
  **/
 public class DateConverter implements Converter<String, Date> {
-    private static final List<String> formarts = new ArrayList<>(4);
+    public static final List<String> formarts = new ArrayList<>(4);
 
     static {
         formarts.add("yyyy-MM");
         formarts.add("yyyy-MM-dd");
         formarts.add("yyyy-MM-dd HH:mm");
         formarts.add("yyyy-MM-dd HH:mm:ss");
+        formarts.add("HH:mm");
     }
 
     @Override
@@ -51,7 +52,7 @@ public class DateConverter implements Converter<String, Date> {
      * @param format  String 格式
      * @return Date 日期
      */
-    public Date parseDate(String dateStr, String format) {
+    public static Date parseDate(String dateStr, String format) {
         Date date = null;
         try {
             DateFormat dateFormat = new SimpleDateFormat(format);
@@ -60,5 +61,29 @@ public class DateConverter implements Converter<String, Date> {
 
         }
         return date;
+    }
+
+    public static String formatTime(Date date) {
+        try {
+            DateFormat dateFormat = new SimpleDateFormat(formarts.get(4));
+            return dateFormat.format(date);
+        } catch (Exception e) {
+
+        }
+        return "";
+    }
+
+    public static String formatDate(Date date) {
+        try {
+            DateFormat dateFormat = new SimpleDateFormat(formarts.get(1));
+            return dateFormat.format(date);
+        } catch (Exception e) {
+
+        }
+        return "";
+    }
+
+    public static Date replaceTime(String datetime, String time){
+        return parseDate(datetime.substring(0, 10) + " " + time, formarts.get(2));
     }
 }

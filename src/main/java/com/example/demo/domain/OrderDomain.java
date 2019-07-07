@@ -30,12 +30,22 @@ public class OrderDomain extends BaseDomain {
     /**
      * 用车开始时间
      */
-    private Date useBusStartTime;
+    private String useBusStartTime;
 
     /**
      * 用车结束时间
      */
-    private Date useBusEndTime;
+    private String useBusEndTime;
+
+    /**
+     * 用车开始时间
+     */
+    private String useBusStartDate;
+
+    /**
+     * 用车结束时间
+     */
+    private String useBusEndDate;
 
     /**
      * 合同编号
@@ -124,6 +134,38 @@ public class OrderDomain extends BaseDomain {
     private String route;
     private String contactTel;
 
+    public String getUseBusEndTime() {
+        return useBusEndTime;
+    }
+
+    public void setUseBusEndTime(String useBusEndTime) {
+        this.useBusEndTime = useBusEndTime;
+    }
+
+    public String getUseBusStartTime() {
+        return useBusStartTime;
+    }
+
+    public void setUseBusStartTime(String useBusStartTime) {
+        this.useBusStartTime = useBusStartTime;
+    }
+
+    public String getUseBusStartDate() {
+        return useBusStartDate;
+    }
+
+    public void setUseBusStartDate(String useBusStartDate) {
+        this.useBusStartDate = useBusStartDate;
+    }
+
+    public String getUseBusEndDate() {
+        return useBusEndDate;
+    }
+
+    public void setUseBusEndDate(String useBusEndDate) {
+        this.useBusEndDate = useBusEndDate;
+    }
+
     public String getContactTel() {
         return contactTel;
     }
@@ -154,22 +196,6 @@ public class OrderDomain extends BaseDomain {
 
     public void setOrdType(String ordType) {
         this.ordType = ordType;
-    }
-
-    public Date getUseBusStartTime() {
-        return useBusStartTime;
-    }
-
-    public void setUseBusStartTime(Date useBusStartTime) {
-        this.useBusStartTime = useBusStartTime;
-    }
-
-    public Date getUseBusEndTime() {
-        return useBusEndTime;
-    }
-
-    public void setUseBusEndTime(Date useBusEndTime) {
-        this.useBusEndTime = useBusEndTime;
     }
 
     public String getContractNo() {
@@ -358,7 +384,9 @@ public class OrderDomain extends BaseDomain {
                 ", ordType='" + ordType + '\'' +
                 ", status='" + status + '\'' +
                 ", useBusStartTime=" + useBusStartTime +
-                ", useBusEndTime=" + useBusEndTime +
+                ", useBusEndTime='" + useBusEndTime + '\'' +
+                ", useBusStartDate='" + useBusStartDate + '\'' +
+                ", useBusEndDate=" + useBusEndDate +
                 ", contractNo='" + contractNo + '\'' +
                 ", contractAmount=" + contractAmount +
                 ", preContractAmount=" + preContractAmount +
