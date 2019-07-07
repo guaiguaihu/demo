@@ -90,6 +90,7 @@ public class ConvertUtils {
         for (Order order : o) {
             OrderDomain orderDomain = new OrderDomain();
             BeanUtils.copyProperties(order, orderDomain);
+            orderDomain.setContainCost(order.getContainCost() == 1);
             OperatorInfoUtil.fillOperateInfo(order);
             orderDomains.add(orderDomain);
         }

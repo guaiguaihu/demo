@@ -6,6 +6,7 @@
     <result column="ord_id" property="ordId" jdbcType="INTEGER" />
     <result column="bus_id" property="busId" jdbcType="INTEGER" />
     <result column="route" property="route" jdbcType="VARCHAR" />
+    <result column="bus_cost" property="busCost" jdbcType="DECIMAL" />
     <result column="add_name" property="addName" jdbcType="VARCHAR" />
     <result column="add_time" property="addTime" jdbcType="DATE" />
     <result column="update_name" property="updateName" jdbcType="VARCHAR" />
@@ -17,7 +18,7 @@
     <result column="delete_flag" property="deleteFlag" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    ord_bus_id, ord_id, bus_id, route, add_name, add_time, update_name, update_time, 
+    ord_bus_id, ord_id, bus_id, route,bus_cost, add_name, add_time, update_name, update_time,
     bus_no, driver, tel, bus_model, delete_flag
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -28,12 +29,12 @@
   </select>
   <insert id="insert" parameterType="com.example.demo.entity.OrderBus" >
     insert into aub_order_bus (ord_bus_id, ord_id, bus_id, 
-      route, add_name, add_time, 
+      route,bus_cost, add_name, add_time,
       update_name, update_time, bus_no, 
       driver, tel, bus_model, 
       delete_flag)
     values (#{ordBusId,jdbcType=INTEGER}, #{ordId,jdbcType=INTEGER}, #{busId,jdbcType=INTEGER}, 
-      #{route,jdbcType=VARCHAR}, #{addName,jdbcType=VARCHAR}, #{addTime,jdbcType=DATE}, 
+      #{route,jdbcType=VARCHAR},#{busCost,jdbcType=DECIMAL}, #{addName,jdbcType=VARCHAR}, #{addTime,jdbcType=DATE},
       #{updateName,jdbcType=VARCHAR}, #{updateTime,jdbcType=DATE}, #{busNo,jdbcType=VARCHAR}, 
       #{driver,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{busModel,jdbcType=VARCHAR}, 
       0)
@@ -43,6 +44,7 @@
     set ord_id = #{ordId,jdbcType=INTEGER},
       bus_id = #{busId,jdbcType=INTEGER},
       route = #{route,jdbcType=VARCHAR},
+      bus_cost = #{busCost,jdbcType=DECIMAL},
       add_name = #{addName,jdbcType=VARCHAR},
       add_time = #{addTime,jdbcType=DATE},
       update_name = #{updateName,jdbcType=VARCHAR},

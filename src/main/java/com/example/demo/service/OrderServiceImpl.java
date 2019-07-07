@@ -23,6 +23,7 @@ import static com.example.demo.constant.OrderStatus.ORDER;
  **/
 @Service
 public class OrderServiceImpl implements IOrderService {
+    private static final String ACTIVE = "生效",ORDER="预定";
     @Autowired
     OrderDAO orderDAO;
 
@@ -33,9 +34,9 @@ public class OrderServiceImpl implements IOrderService {
     @Transactional
     public void saveOrder(Order order, List<OrderBus> busList) {
         OperatorInfoUtil.fillOperateInfo(order);
-        order.setStatus(ACTIVE.getName());
+        order.setStatus(ACTIVE);
         if(CollectionUtils.isEmpty(busList)){
-            order.setStatus(ORDER.getName());
+            order.setStatus(ORDER);
             orderDAO.insert(order);
             return;
         }
@@ -50,9 +51,9 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public void editOrder(Order order, List<OrderBus> busList) {
         OperatorInfoUtil.fillUpdateInfo(order);
-        order.setStatus(ACTIVE.getName());
+        order.setStatus(ACTIVE);
         if(CollectionUtils.isEmpty(busList)){
-            order.setStatus(ORDER.getName());
+            order.setStatus(ORDER);
             orderDAO.updateByPrimaryKey(order);
             return;
         }

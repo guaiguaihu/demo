@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -17,9 +18,18 @@ public class OrderBusDomain extends BaseDomain {
     private String busModel;
     private String driver;
     private String tel;
+    private BigDecimal busCost;
     private String remark;
     private Date useBusStartTime;
     private Date useBusEndTime;
+
+    public BigDecimal getBusCost() {
+        return busCost;
+    }
+
+    public void setBusCost(BigDecimal busCost) {
+        this.busCost = busCost;
+    }
 
     public Date getUseBusStartTime() {
         return useBusStartTime;

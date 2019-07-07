@@ -15,7 +15,7 @@ public interface OrderBusDAO {
 
     int updateByPrimaryKey(OrderBus record);
 
-    List<OrderBusDomain> listByOrdId(@Param("ordId") Integer ordId);
+    List<OrderBus> listByOrdId(@Param("ordId") Integer ordId);
 
     void deleteByOrdId(@Param("ordId") Integer ordId);
 }

@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 public class OrderBus {
@@ -22,6 +23,7 @@ public class OrderBus {
      * 车辆行程
      */
     private String route;
+    private BigDecimal busCost;
 
     /**
      * 添加人
@@ -67,6 +69,14 @@ public class OrderBus {
      * 删除标记：0未删除，1已删除
      */
     private Integer deleteFlag;
+
+    public BigDecimal getBusCost() {
+        return busCost;
+    }
+
+    public void setBusCost(BigDecimal busCost) {
+        this.busCost = busCost;
+    }
 
     public Integer getOrdBusId() {
         return ordBusId;

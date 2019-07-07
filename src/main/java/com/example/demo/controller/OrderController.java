@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import com.example.demo.domain.OrderBusDomain;
+import com.example.demo.entity.OrderBus;
 import com.example.demo.mapper.OrderBusDAO;
 import com.example.demo.mapper.OrderDAO;
 import com.example.demo.domain.OrderDomain;
@@ -9,6 +11,7 @@ import com.example.demo.service.IOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import static com.example.demo.util.ConvertUtils.*;
@@ -65,7 +68,13 @@ public class OrderController extends BaseController {
         ResponseResult responseResult = new ResponseResult();
         responseResult.setCode(STATUS_SUCCESS);
         OrderDomain orderDomain = orderReConvertor.apply(orderDao.getOrder(ordId));
-        orderDomain.setBusList(orderBusDAO.listByOrdId(ordId));
+
+        List<OrderBus> orderBusDomains = orderBusDAO.listByOrdId(ordId);
+        List<OrderBusDomain> apply = orderBusListReConvertor.apply(orderBusDomains);
+//        for (OrderBusDomain orderBusDomain : apply) {
+//            orderBusDomain.setBusCost(BigDecimal.ONE);
+//        }
+        orderDomain.setBusList(apply);
         responseResult.setData(orderDomain);
         return responseResult;
     }
@@ -79,7 +88,7 @@ public class OrderController extends BaseController {
         Items<OrderDomain> items = new Items();
         items.setTotal(orderDao.getListOrderCount(orderDomain, orderDomain.getPage(), orderDomain.getLimit()));
         for (OrderDomain domain : domainList) {
-            domain.setBusList(orderBusDAO.listByOrdId(domain.getOrdId()));
+            domain.setBusList(orderBusListReConvertor.apply(orderBusDAO.listByOrdId(domain.getOrdId())));
         }
         items.setItems(domainList);
         responseResult.setData(items);
