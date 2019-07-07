@@ -12,10 +12,11 @@
     <result column="update_name" property="updateName" jdbcType="VARCHAR" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="bus_source" property="busSource" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     bus_id, bus_no, driver, tel, bus_model, add_name, add_time, update_name, update_time,
-    remark
+    remark,bus_source
   </sql>
   <sql id="pagination">
     bus_id > (#{page}-1)*#{limit} limit #{limit}
@@ -24,11 +25,11 @@
     insert into aub_bus (bus_id, bus_no, driver, 
       tel, bus_model, add_name,
       add_time, update_name, update_time,
-      remark)
+      remark,bus_source)
     values (#{busId,jdbcType=INTEGER}, #{busNo,jdbcType=VARCHAR}, #{driver,jdbcType=VARCHAR},
       #{tel,jdbcType=VARCHAR}, #{busModel,jdbcType=INTEGER}, #{addName,jdbcType=VARCHAR},
       #{addTime,jdbcType=TIMESTAMP}, #{updateName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
-      #{remark,jdbcType=VARCHAR})
+      #{remark,jdbcType=VARCHAR},#{busSource,jdbcType=VARCHAR})
   </insert>
 
   <update id="update" parameterType="com.example.demo.entity.Bus" >
@@ -48,6 +49,9 @@
       </if>
       <if test="remark != null">
         remark = #{remark},
+      </if>
+      <if test="busSource != null">
+          bus_source = #{busSource},
       </if>
         update_name = #{updateName},
         update_time = #{updateTime},
@@ -87,6 +91,9 @@
     </if>
     <if test="bus.busModel != null and bus.busModel != ''">
       and bus_model = #{bus.busModel}
+    </if>
+    <if test="bus.busSource != null and bus.busSource != ''">
+      and bus_source = #{bus.busSource}
     </if>
   </sql>
 

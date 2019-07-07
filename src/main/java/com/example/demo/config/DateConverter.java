@@ -1,6 +1,7 @@
 package com.example.demo.config;
 
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.util.StringUtils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -84,6 +85,9 @@ public class DateConverter implements Converter<String, Date> {
     }
 
     public static Date replaceTime(String datetime, String time){
+        if(StringUtils.isEmpty(time)){
+            return parseDate(datetime.substring(0, 10), formarts.get(1));
+        }
         return parseDate(datetime.substring(0, 10) + " " + time, formarts.get(2));
     }
 }

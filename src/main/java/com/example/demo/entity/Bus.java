@@ -32,6 +32,7 @@ public class Bus {
      * 备注
      */
     private String remark;
+    private String busSource;
 
     private String addName;
 
@@ -44,6 +45,14 @@ public class Bus {
     private String deleteName;
 
     private Date deleteTime;
+
+    public String getBusSource() {
+        return busSource;
+    }
+
+    public void setBusSource(String busSource) {
+        this.busSource = busSource;
+    }
 
     public String getDeleteName() {
         return deleteName;

@@ -18,10 +18,19 @@ public class BusDomain extends BaseDomain{
     private String driver;
     private String tel;
     private String remark;
+    private String busSource;
     private String status;
     private Date useBusStartTime;
     private Date useBusEndTime;
     private List<OrderDomain> orderDomainList;
+
+    public String getBusSource() {
+        return busSource;
+    }
+
+    public void setBusSource(String busSource) {
+        this.busSource = busSource;
+    }
 
     public List<OrderDomain> getOrderDomainList() {
         return orderDomainList;
