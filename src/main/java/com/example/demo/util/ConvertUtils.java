@@ -10,6 +10,7 @@ import com.example.demo.entity.Order;
 import com.example.demo.entity.OrderBus;
 import com.google.common.base.Function;
 import org.springframework.beans.BeanUtils;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -77,8 +78,12 @@ public class ConvertUtils {
         Order order = new Order();
         BeanUtils.copyProperties(o, order);
         order.setContainCost(o.getContainCost() ? 1 : 0);
-        order.setUseBusStartTime(replaceTime(o.getUseBusStartDate(), o.getUseBusStartTime()));
-        order.setUseBusEndTime(replaceTime(o.getUseBusEndDate(), o.getUseBusEndTime()));
+        if(!StringUtils.isEmpty(o.getUseBusStartDate())){
+            order.setUseBusStartTime(replaceTime(o.getUseBusStartDate(), o.getUseBusStartTime()));
+        }
+        if(!StringUtils.isEmpty(o.getUseBusEndDate())){
+            order.setUseBusEndTime(replaceTime(o.getUseBusEndDate(), o.getUseBusEndTime()));
+        }
         return order;
     };
 
