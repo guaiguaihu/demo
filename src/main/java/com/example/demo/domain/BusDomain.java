@@ -68,6 +68,10 @@ public class BusDomain extends BaseDomain{
         return page;
     }
 
+    public int getOffset(){
+        return (page - 1) * limit;
+    }
+
     public void setPage(int page) {
         this.page = page;
     }

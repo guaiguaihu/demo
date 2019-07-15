@@ -74,9 +74,9 @@ public class BusController extends BaseController {
         ResponseResult responseResult = new ResponseResult();
         responseResult.setCode(STATUS_SUCCESS);
         List<BusDomain> domainList =
-                busesReConvertor.apply(busDao.listBus(busDomain, busDomain.getPage(), busDomain.getLimit()));
+                busesReConvertor.apply(busDao.listBus(busDomain, busDomain.getOffset(), busDomain.getLimit()));
         Items<BusDomain> items = new Items();
-        items.setTotal(busDao.getListBusCount(busDomain, busDomain.getPage(), busDomain.getLimit()));
+        items.setTotal(busDao.getListBusCount(busDomain));
         items.setItems(domainList);
         for (BusDomain domain : domainList) {
             domain.setOrderDomainList(ordersReConvertor.apply(orderDAO.listUsingOrder(domain.getBusId())));

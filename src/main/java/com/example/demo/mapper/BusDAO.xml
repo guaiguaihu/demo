@@ -19,7 +19,7 @@
     remark,bus_source
   </sql>
   <sql id="pagination">
-    bus_id > (#{page}-1)*#{limit} limit #{limit}
+    limit #{offset}, #{limit}
   </sql>
   <insert id="insert" parameterType="com.example.demo.entity.Bus" >
     insert into aub_bus (bus_id, bus_no, driver, 
@@ -108,7 +108,7 @@
         or (c.use_bus_start_time &lt;= #{bus.useBusEndTime,jdbcType=TIMESTAMP}
             and c.use_bus_end_time > #{bus.useBusEndTime,jdbcType=TIMESTAMP})
         where a.bus_id=b.bus_id and b.delete_flag=0)
-     <include refid="searchCondition"/> and <include refid="pagination"/>
+     <include refid="searchCondition"/> <include refid="pagination"/>
   </select>
 
   <select id="getBus" parameterType="long" resultMap="BaseResultMap" flushCache="false">

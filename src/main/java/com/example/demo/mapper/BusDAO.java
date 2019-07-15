@@ -13,7 +13,7 @@ public interface BusDAO {
     int insert(Bus bus);
     int update(Bus bus);
     int delete(Bus bus);
-    Integer getListBusCount(@Param("bus") BusDomain busDomain, @Param("page") int page, @Param("limit") int limit);
-    List<Bus> listBus(@Param("bus") BusDomain busDomain, @Param("page") int page, @Param("limit") int limit);
+    Integer getListBusCount(@Param("bus") BusDomain busDomain);
+    List<Bus> listBus(@Param("bus") BusDomain busDomain, @Param("offset") int offset, @Param("limit") int limit);
     Bus getBus(@Param("busId") Long busId);
 }

@@ -60,3 +60,6 @@ logging:
   config: classpath:logback.xml
   path: /home/bus
 
+mybatis-plus:
+  global-config:
+    sql-parser-cache: true
